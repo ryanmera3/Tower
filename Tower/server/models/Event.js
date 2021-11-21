@@ -17,3 +17,10 @@ export const EventSchema = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 
 )
+
+EventSchema.virtual('account', {
+  localField: 'accountId',
+  foreignField: '_id',
+  ref: 'Profile',
+  justOne: true
+})

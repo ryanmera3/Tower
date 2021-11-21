@@ -1,6 +1,8 @@
 import { eventsService } from '../services/EventsService'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import BaseController from '../utils/BaseController'
+import { attendeesService } from '../services/AttendeesService'
+import { commentsService } from '../services/CommentsService'
 
 export class EventsController extends BaseController {
   constructor() {
@@ -8,6 +10,8 @@ export class EventsController extends BaseController {
     this.router
       .get('', this.getEvents)
       .get('/:id', this.getEventById)
+      .get('/:id/attendees', this.getEventAttendees)
+      .get('/:id/comments', this.getCommentsByEvent)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .put('/:id', this.editEvent)
       .post('', this.createEvent)
@@ -33,6 +37,15 @@ export class EventsController extends BaseController {
     }
   }
 
+  async getCommentsByEvent(req, res, next) {
+    try {
+      const comments = await commentsService.getCommentByEvent(req.params.id)
+      return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async createEvent(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -45,11 +58,20 @@ export class EventsController extends BaseController {
     }
   }
 
+  async getEventAttendees(req, res, next) {
+    try {
+      const result = await attendeesService.getEventAttendees(req.params.id)
+      return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async editEvent(req, res, next) {
     try {
-      req.body.id = req.params.id
       req.body.creatorId = req.userInfo.id
-      const editedEvent = await eventsService.editEvent(req.body)
+      const eventId = req.params.id
+      const editedEvent = await eventsService.editEvent(eventId, req.body)
       return res.send(editedEvent)
     } catch (error) {
       next(error)

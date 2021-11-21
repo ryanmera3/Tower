@@ -21,8 +21,8 @@ class EventsService {
     return newEvent
   }
 
-  async editEvent(body) {
-    const found = await this.getEventById(body.id)
+  async editEvent(id, body) {
+    const found = await this.getEventById(id)
 
     if (!found) {
       throw new BadRequest('Invalid ID')
@@ -30,8 +30,11 @@ class EventsService {
     if (found.isCanceled) {
       throw new BadRequest('This event has been cancelled')
     }
+    if (found.creatorId.toString() !== body.creatorId) {
+      throw new Forbidden('You cannot edit this')
+    }
     delete body.isCanceled
-    const updatedEvent = await dbContext.Events.findByIdAndUpdate(body.id, body, { new: true })
+    const updatedEvent = await dbContext.Events.findByIdAndUpdate(id, body, { new: true })
     return updatedEvent
   }
 
