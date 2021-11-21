@@ -1,10 +1,36 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 my-2">
+        <div class="row justify-content-center">
+          <div class="col-md-11 card card-bg my-2">
+            <p class="w-25 card-body text-white">
+              Get ahead of the scalpers. Reserve your seat now with real events
+              for real people
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="
+        row
+        text-center
+        bg-secondary
+        justify-content-center
+        mx-auto
+        text-white
+      "
+    >
+      <div class="col-md-2 selectable py-2">All</div>
+      <div class="col-md-2 selectable py-2">Expos</div>
+      <div class="col-md-2 selectable py-2">Conventions</div>
+      <div class="col-md-2 selectable py-2">Exhibits</div>
+      <div class="col-md-2 selectable py-2">Sports</div>
+      <div class="col-md-2 selectable py-2">Digital</div>
+    </div>
+    <div class="row my-2 mx-auto">
+      <Event />
     </div>
   </div>
 </template>
@@ -16,15 +42,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
+.home {
   display: grid;
   height: 80vh;
   place-content: center;
   text-align: center;
   user-select: none;
-  .home-card{
+  .home-card {
     width: 50vw;
-    > img{
+    > img {
       height: 200px;
       max-width: 200px;
       width: 100%;
@@ -32,5 +58,12 @@ export default {
       object-position: center;
     }
   }
+}
+.w-90 {
+  width: 90%;
+}
+.card-bg {
+  background: url("https://s3-alpha-sig.figma.com/img/cd1b/eb35/3224c652f40c0754047c232b09e71cc3?Expires=1638144000&Signature=O8jkpdowkqsGxiHdZEgf86fP3imghWI11OVeKD9ZpMTOqNgZ9mMDlMS6RJUlEQ9lSQLWoKtxzCesKiqVqiQOc8I2gJ5b64E9qwpvnHIO0DLRzWz3waso2Wy-jey6AR02Y38coM44ywM71bFgZHv6Zy-doPFUgWNWJq3-xM9eVQG8uI1aEZleHAo6bI5nAHNvndhh4DpKz95iMafTqJL4TrP6mV-hk7tfJzk5QX-I16MltWvEd2kPwXtdQDoYJlvZGdm5rSmNGvSHCJlGwRfLyQdpGhdGR72p6ob69Xpus6PbdAjbE-a11M3~5YWNmIVQqRNX603VU-z0ugelyknBJg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  object-fit: contain;
 }
 </style>
