@@ -4,12 +4,16 @@ import { eventsService } from './EventsService'
 
 class AttendeesService {
   async createAttendee(attendeeData) {
-    const event = await eventsService.getEventById(attendeeData.eventId)
-    if (event.capacity < 1) {
+    const events = await eventsService.getEventById(attendeeData.eventId)
+    const found = await dbContext.Attendees.findOne({ eventId: attendeeData.eventId, accountId: attendeeData.accountId })
+    if (events.capacity < 1) {
       throw new BadRequest('No more capacity')
     }
-    await event.capacity--
-    await event.save()
+    if (found) {
+      throw new BadRequest('You already have a ticket')
+    }
+    await events.capacity--
+    await events.save()
     const newAttendee = await dbContext.Attendees.create(attendeeData)
     return newAttendee.populate('event')
   }
