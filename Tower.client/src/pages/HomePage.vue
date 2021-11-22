@@ -130,5 +130,6 @@ export default {
 .card-bg {
   background: url("https://s3-alpha-sig.figma.com/img/cd1b/eb35/3224c652f40c0754047c232b09e71cc3?Expires=1638144000&Signature=O8jkpdowkqsGxiHdZEgf86fP3imghWI11OVeKD9ZpMTOqNgZ9mMDlMS6RJUlEQ9lSQLWoKtxzCesKiqVqiQOc8I2gJ5b64E9qwpvnHIO0DLRzWz3waso2Wy-jey6AR02Y38coM44ywM71bFgZHv6Zy-doPFUgWNWJq3-xM9eVQG8uI1aEZleHAo6bI5nAHNvndhh4DpKz95iMafTqJL4TrP6mV-hk7tfJzk5QX-I16MltWvEd2kPwXtdQDoYJlvZGdm5rSmNGvSHCJlGwRfLyQdpGhdGR72p6ob69Xpus6PbdAjbE-a11M3~5YWNmIVQqRNX603VU-z0ugelyknBJg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
   object-fit: contain;
+  background-position: center;
 }
 </style>

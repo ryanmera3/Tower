@@ -4,8 +4,8 @@ import { api } from "./AxiosService"
 
 
 class AttendeesService {
-  async attendEvent(){
-    const res = await api.post('api/attendees/')
+  async attendEvent(body){
+    const res = await api.post('api/attendees/', body)
     logger.log(res.data)
     AppState.attendees.unshift(res.data)
 
@@ -15,6 +15,17 @@ class AttendeesService {
     logger.log(res.data)
     AppState.attendees = res.data
 
+  }
+  async getMyAttendees(){
+    const res = await api.get(`account/attendees`)
+    logger.log(res.data)
+    AppState.attendees = res.data
+
+  }
+  async cancelAttend(id){
+    const res = await api.delete(`api/attendees/` + id)
+    logger.log(res.data)
+    AppState.myEvents = AppState.myEvents.filter(r => r.id !== id)
   }
 }
 export const attendeesService = new AttendeesService()

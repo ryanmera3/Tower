@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mb-5">
       <div class="col-md-12">My Events</div>
-      <Event />
+      <MyEvents />
     </div>
     <div class="row">
       <div class="col-md-12">Upcoming Events</div>
@@ -12,13 +12,23 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { attendeesService } from "../services/AttendeesService"
 export default {
   name: 'Account',
   setup() {
+    onMounted(async () => {
+      await attendeesService.getMyAttendees()
+    })
     return {
-      account: computed(() => AppState.account)
+      async cancelAttendee() {
+        await attendeesService.cancelAttendee()
+      },
+      account: computed(() => AppState.account),
+      attendees: computed(() => AppState.attendees),
+      events: computed(() => AppState.events),
+      myEvents: computed(() => AppState.myEvents)
     }
   }
 }

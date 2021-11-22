@@ -46,7 +46,7 @@
                   <button
                     class="btn btn-outline-warning"
                     @click="attendEvent"
-                    v-if="activeEvent.capacity >= 1 && !activeEvent.isCanceled"
+                    v-if="canSeeAttend(activeEvent)"
                   >
                     Attend <i class="mdi mdi-human"> </i>
                   </button>
@@ -78,7 +78,12 @@
           v-for="a in attendees"
           :key="a.accountId"
         >
-          {{ a }}
+          <img
+            :src="a.account.picture"
+            alt=""
+            class="w-50 rounded-pill m-2"
+            :title="a.account.name"
+          />
         </div>
       </div>
     </div>
@@ -123,6 +128,7 @@ import Pop from "../utils/Pop"
 export default {
   name: 'EventDetails',
   setup() {
+
     const route = useRoute()
     const router = useRouter()
     const state = reactive({ editable: {} })
@@ -136,6 +142,10 @@ export default {
       canSee(activeEvent) {
         return activeEvent.creatorId === AppState.account.id &&
           activeEvent.isCanceled !== true
+      },
+      canSeeAttend(activeEvent) {
+        return activeEvent.creatorId === AppState.account.id &&
+          activeEvent.isCanceled !== true && !AppState.attendees.find(a => a.id !== AppState.account.id)
       },
       push() {
         router.push({
@@ -156,7 +166,8 @@ export default {
       },
       async attendEvent() {
         try {
-          await attendeesService.attendEvent()
+
+          await attendeesService.attendEvent({ eventId: route.params.id, accountId: AppState.account.id })
         } catch (error) {
           logger.error(error)
           Pop.toast(error)
