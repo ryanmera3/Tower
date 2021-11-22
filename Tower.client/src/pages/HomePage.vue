@@ -22,12 +22,20 @@
         text-white
       "
     >
-      <div class="col-md-2 selectable py-2">All</div>
-      <div class="col-md-2 selectable py-2">Expos</div>
-      <div class="col-md-2 selectable py-2">Conventions</div>
-      <div class="col-md-2 selectable py-2">Exhibits</div>
-      <div class="col-md-2 selectable py-2">Sports</div>
-      <div class="col-md-2 selectable py-2">Digital</div>
+      <div class="col-md-2 selectable py-2" @click="getEvents">All</div>
+      <div class="col-md-2 selectable py-2" @click="getEvents">Expos</div>
+      <div class="col-md-2 selectable py-2" @click="getEvents('conventions')">
+        Conventions
+      </div>
+      <div class="col-md-2 selectable py-2" @click="getEvents('exhibits')">
+        Exhibits
+      </div>
+      <div class="col-md-2 selectable py-2" @click="getEvents('sports')">
+        Sports
+      </div>
+      <div class="col-md-2 selectable py-2" @click="getEvents('digital')">
+        Digital
+      </div>
     </div>
     <div class="row my-2 mx-auto">
       <Event />
@@ -39,10 +47,14 @@
 import { computed } from "@vue/reactivity"
 import { useRouter } from "vue-router"
 import { AppState } from "../AppState"
+import { eventsService } from "../services/EventsService"
 export default {
   setup() {
     const router = useRouter()
     return {
+      async getEvents(query) {
+        await eventsService.getEvents(query)
+      },
       name: 'Home',
       push(id) {
         router.push({

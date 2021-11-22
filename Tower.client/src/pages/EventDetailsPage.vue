@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-7 mt-4 d-flex flex-column">
-          <div class="row mb-3 text-white">
+          <div class="row mb-3 text-dark">
             <div class="col-md-6">
               <h4>{{ activeEvent.name }}</h4>
               <h5>{{ activeEvent.location }}</h5>
@@ -26,10 +26,16 @@
               </h5>
             </div>
             <p class="col-md-12">{{ activeEvent.description }}</p>
-            <div class="col-md-12 h-50 align-items-end d-flex">
+            <div class="col-md-12 align-items-end d-flex">
               <div class="row w-100">
-                <div class="col-md-6 d-flex">
-                  <h5 class="text-dark">{{ activeEvent.capacity }}</h5>
+                <div class="col-md-6 d-flex align-items-end">
+                  <h5
+                    :class="[
+                      activeEvent.capacity === 0 ? 'text-danger' : 'text-dark',
+                    ]"
+                  >
+                    {{ activeEvent.capacity }}
+                  </h5>
                   <h6 class="mx-2">SPOTS LEFT</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
@@ -43,12 +49,33 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">See who's attending</div>
+    <div class="container mb-3">
+      <div class="row mb-2">
+        <div class="col-md-12 ps-0">See who's attending</div>
       </div>
       <div class="row card bg-secondary">
         <div class="col-md-12 card-body"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-md-12 text-secondary ps-0">What are people saying</div>
+      </div>
+      <div class="row card bg-secondary">
+        <div class="col-md-12 card-body text-success text-end">
+          Join the conversation
+        </div>
+        <div class="col-md-12 pb-3 d-flex justify-content-center">
+          <input
+            type="text"
+            class="w-100 rounded border-0"
+            placeholder="Tell the people..."
+          />
+        </div>
+        <div class="col-md-12 text-end mb-2">
+          <button class="btn btn-outline-success">post comment</button>
+        </div>
+        <Comment />
       </div>
     </div>
   </div>
@@ -69,8 +96,15 @@ export default {
     })
     return {
       events: computed(() => AppState.events),
-      activeEvent: computed(() => AppState.activeEvent)
+      activeEvent: computed(() => AppState.activeEvent),
+      account: computed(() => AppState.account)
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.w-95 {
+  width: 95%;
+}
+</style>
