@@ -33,7 +33,7 @@
         text-white
       "
     >
-      <div class="col-md-2 selectable py-2" @click="getEvents">All</div>
+      <div class="col-md-2 selectable py-2" @click="getAllEvents">All</div>
       <div class="col-md-2 selectable py-2" @click="getEvents('concert')">
         Concert
       </div>
@@ -61,12 +61,27 @@ import { computed } from "@vue/reactivity"
 import { useRouter } from "vue-router"
 import { AppState } from "../AppState"
 import { eventsService } from "../services/EventsService"
+import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 export default {
   setup() {
     const router = useRouter()
     return {
-      async getEvents(query) {
-        await eventsService.getEvents(query)
+      async getAllEvents() {
+        try {
+          await eventsService.getAllEvents()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error)
+        }
+      },
+      async getEvents(query = {}) {
+        try {
+          await eventsService.getEvents(query)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error)
+        }
       },
       name: 'Home',
       push(id) {

@@ -28,6 +28,9 @@
           </p>
           <p class="d-flex my-0 text-danger" v-else>Sold out</p>
         </h6>
+        <p class="bg-danger text-white" v-if="e.isCanceled">
+          THIS EVENT IS CANCELED
+        </p>
       </div>
     </div>
   </div>
@@ -44,6 +47,7 @@ export default {
   setup() {
     const router = useRouter()
     onMounted(async () => {
+      eventsService.getAllEvents()
     })
     return {
       push(id) {

@@ -1,17 +1,17 @@
 <template>
-  <div class="createEvent">
-    <form @submit.prevent="createEvent">
+  <div class="editEvent">
+    <form @submit.prevent="editEvent">
       <button
         type="button"
-        class="btn btn-outline-success"
+        class="btn btn-outline-warning ms-2"
         data-bs-toggle="modal"
-        data-bs-target="#eventModal"
+        data-bs-target="#editModal"
       >
-        Create Event
+        Edit Event <i class="mdi mdi-pencil"></i>
       </button>
       <div
         class="modal fade"
-        id="eventModal"
+        id="editModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -31,57 +31,55 @@
               <div class="row">
                 <input
                   type="text"
-                  v-model="state.editable.name"
+                  v-model="editable.name"
                   placeholder="name"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <input
                   type="text"
-                  v-model="state.editable.description"
+                  v-model="editable.description"
                   placeholder="description"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <input
                   type="text"
-                  v-model="state.editable.coverImg"
+                  v-model="editable.coverImg"
                   placeholder="coverImg"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <input
                   type="text"
-                  v-model="state.editable.location"
+                  v-model="editable.location"
                   placeholder="location"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <input
                   type="number"
-                  v-model="state.editable.capacity"
+                  v-model="editable.capacity"
                   placeholder="capacity"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <input
                   type="date"
-                  v-model="state.editable.startDate"
+                  v-model="editable.startDate"
                   placeholder="startDate"
                   class="col-md-12 my-1"
                   required:true
                 />
                 <div id="v-model-select">
-                  <select v-model="state.editable.type">
+                  <select v-model="editable.type">
                     <option disabled value="">Select event type</option>
                     <option value="concert">concert</option>
                     <option value="convention">convention</option>
                     <option value="sport">sport</option>
                     <option value="digital">digital</option>
                   </select>
-                  <span class="text-dark"
-                    >Selected: {{ state.editable.type }}</span
-                  >
+                  <span class="text-dark">Selected: {{ editable.type }}</span>
                 </div>
               </div>
             </div>
@@ -107,26 +105,39 @@
 
 <script>
 import { Modal } from "bootstrap"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { eventsService } from "../services/EventsService"
-import { computed, reactive } from "@vue/reactivity"
+import { computed, reactive, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
+import { watchEffect } from "@vue/runtime-core"
+import { logger } from "../utils/Logger"
+import { Event } from "../models/Event"
+import Pop from "../utils/Pop"
 export default {
-  setup() {
-    const state = reactive({ editable: {} })
+  props: {
+    activeEv: {
+      type: Event,
+      default: () => new Event({})
+    }
+  },
+  setup(props) {
     const router = useRouter()
+    const route = useRoute()
+    const editable = ref({})
+    watchEffect(() => {
+      editable.value = { ...props.activeEv }
+    })
     return {
-      state,
-      async createEvent() {
-        const res = await eventsService.createEvent(state.editable)
-        const modalElem = document.getElementById('eventModal')
-        Modal.getOrCreateInstance(modalElem).toggle()
-        state.editable = {}
-        await eventsService.setActive(res.id)
-        await router.push({
-          name: 'eventdetails',
-          params: { id: res.id }
-        })
+      editable,
+      async editEvent() {
+        try {
+          await eventsService.editEvent(route.params.id, editable.value)
+          const modalElem = document.getElementById('editModal')
+          Modal.getOrCreateInstance(modalElem).toggle()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error)
+        }
       },
       events: computed(() => AppState.events),
       activeEvent: computed(() => AppState.activeEvent)
