@@ -42,8 +42,9 @@ export default {
     })
     return {
       push(id) {
+        eventsService.setActive(id)
         router.push({
-          name: "eventdetails",
+          name: "EventDetails",
           params: { id: id }
         })
       },

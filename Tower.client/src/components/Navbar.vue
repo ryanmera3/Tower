@@ -18,14 +18,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'EventDetails', params: { id: id } }"
-            class="btn text-success lighten-30 selectable text-uppercase mx-3"
-          >
-            Event Details
-          </router-link>
-        </li>
         <CreateEvent />
       </ul>
       <span class="navbar-text">

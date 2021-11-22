@@ -36,8 +36,24 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity"
+import { useRouter } from "vue-router"
+import { AppState } from "../AppState"
 export default {
-  name: 'Home'
+  setup() {
+    const router = useRouter()
+    return {
+      name: 'Home',
+      push(id) {
+        router.push({
+          name: "eventdetails",
+          params: { id: id }
+        })
+      },
+      user: computed(() => AppState.user),
+      events: computed(() => AppState.events)
+    }
+  }
 }
 </script>
 
