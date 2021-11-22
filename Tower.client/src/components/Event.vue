@@ -4,7 +4,7 @@
     v-for="e in events"
     :key="e.id"
   >
-    <div class="card h-100 border-5 bg-secondary">
+    <div class="card h-100 border-5 bg-secondary justify-content-end text-out">
       <div
         class="
           card-body
@@ -22,6 +22,12 @@
         <h6 class="fw-bold text-out">
           {{ new Date(e.startDate).toLocaleString() }}
         </h6>
+        <h6 class="d-flex justify-content-end">
+          <p class="d-flex my-0 text-white text-out" v-if="e.capacity >= 1">
+            {{ e.capacity }} spots left
+          </p>
+          <p class="d-flex my-0 text-danger" v-else>Sold out</p>
+        </h6>
       </div>
     </div>
   </div>
@@ -38,7 +44,6 @@ export default {
   setup() {
     const router = useRouter()
     onMounted(async () => {
-      eventsService.getEvents()
     })
     return {
       push(id) {
@@ -60,6 +65,6 @@ export default {
   height: 200px;
 }
 .text-out {
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 0.75px black;
 }
 </style>

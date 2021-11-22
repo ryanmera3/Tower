@@ -34,36 +34,42 @@
                   v-model="state.editable.name"
                   placeholder="name"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <input
                   type="text"
                   v-model="state.editable.description"
                   placeholder="description"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <input
                   type="text"
                   v-model="state.editable.coverImg"
                   placeholder="coverImg"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <input
                   type="text"
                   v-model="state.editable.location"
                   placeholder="location"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <input
                   type="number"
                   v-model="state.editable.capacity"
                   placeholder="capacity"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <input
                   type="date"
                   v-model="state.editable.startDate"
                   placeholder="startDate"
                   class="col-md-12 my-1"
+                  required:true
                 />
                 <div id="v-model-select">
                   <select v-model="state.editable.type">

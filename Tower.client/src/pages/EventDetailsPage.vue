@@ -39,7 +39,10 @@
                   <h6 class="mx-2">SPOTS LEFT</h6>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                  <button class="btn btn-outline-warning">
+                  <button
+                    class="btn btn-outline-warning"
+                    v-if="activeEvent.capacity >= 1"
+                  >
                     Attend <i class="mdi mdi-human"> </i>
                   </button>
                 </div>

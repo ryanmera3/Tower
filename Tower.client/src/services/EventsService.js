@@ -4,8 +4,8 @@ import { api } from "./AxiosService"
 
 
 class EventsService {
-  async getEvents(query = {}){
-    const res = await api.get('api/events')
+  async getEvents(query = ''){
+    const res = await api.get(`api/events?type=${query}`)
     logger.log(res.data)
     AppState.events = res.data
   }
