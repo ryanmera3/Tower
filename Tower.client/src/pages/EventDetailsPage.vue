@@ -60,7 +60,7 @@
               class="col-md-12 d-flex align-items-end justify-content-end"
             >
               <EditEvent :event="event" />
-              <button class="btn btn-danger ms-2" @click="deleteEvent">
+              <button class="btn btn-outline-danger ms-2" @click="deleteEvent">
                 Cancel Event
               </button>
             </div>

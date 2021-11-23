@@ -6,7 +6,6 @@
           <div class="col-md-11 card card-bg my-2 height-stuff d-flex">
             <h5
               class="
-                w-25
                 card-body
                 text-white
                 d-flex

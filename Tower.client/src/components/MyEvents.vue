@@ -14,6 +14,7 @@
           text-white
           selectable
         "
+        @click="push(a.eventId)"
         :style="{ backgroundImage: `url(${a.event[0].coverImg})` }"
       >
         <h5 class="fw-bold text-out">{{ a.event[0].name }}</h5>
@@ -33,8 +34,12 @@
         <p class="bg-danger text-white" v-if="a.event[0].isCanceled">
           THIS EVENT IS CANCELED
         </p>
-        <button class="btn btn-danger" @click="cancelAttend(a.id)">
-          Cancel res
+        <button
+          class="btn btn-danger"
+          @click.stop="cancelAttend(a.id)"
+          v-if="!a.event[0].isCanceled"
+        >
+          Cancel Reservation
         </button>
       </div>
     </div>
@@ -65,6 +70,7 @@ export default {
       },
       async cancelAttend(id) {
         await attendeesService.cancelAttend(id)
+        await attendeesService.getMyAttendees()
       },
       account: computed(() => AppState.account),
       attendees: computed(() => AppState.attendees),

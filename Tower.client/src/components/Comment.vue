@@ -6,6 +6,7 @@
           class="rounded-pill w-75 d-flex justify-content-center"
           :src="c.creator.picture"
           alt=""
+          :title="c.creator.name"
         />
       </div>
       <div class="col-md-10 d-flex bg-white rounded justify-content-between">
@@ -18,10 +19,10 @@
           </p>
         </div>
         <button
-          class="btn btn-danger h-25 align-self-end d-flex mb-2"
+          class="btn btn-outline-danger align-self-end d-flex mb-2"
           @click="deleteComment(c)"
         >
-          Test
+          Delete Comment
         </button>
       </div>
     </div>

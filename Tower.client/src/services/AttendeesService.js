@@ -7,6 +7,7 @@ class AttendeesService {
   async attendEvent(body){
     const res = await api.post('api/attendees/', body)
     logger.log(res.data)
+    AppState.activeEvent.capacity--
     AppState.attendees.unshift(res.data)
 
   }
@@ -25,7 +26,6 @@ class AttendeesService {
   async cancelAttend(id){
     const res = await api.delete(`api/attendees/` + id)
     logger.log(res.data)
-    AppState.myEvents = AppState.myEvents.filter(r => r.id !== id)
   }
 }
 export const attendeesService = new AttendeesService()
