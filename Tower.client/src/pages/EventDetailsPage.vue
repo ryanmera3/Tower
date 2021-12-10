@@ -144,8 +144,7 @@ export default {
           activeEvent.isCanceled !== true
       },
       canSeeAttend(activeEvent) {
-        return activeEvent.creatorId === AppState.account.id &&
-          activeEvent.isCanceled !== true && !AppState.attendees.find(a => a.id !== AppState.account.id)
+        return activeEvent.isCanceled !== true && !AppState.attendees.find(a => a.id !== AppState.account.id)
       },
       push() {
         router.push({

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1 class="display-3">Tower</h1>
+        <h1 class="display-3" title="to-homepage">Tower</h1>
       </div>
     </router-link>
     <button
