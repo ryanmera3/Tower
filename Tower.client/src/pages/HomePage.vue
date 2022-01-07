@@ -127,7 +127,7 @@ export default {
   -webkit-text-stroke: 0.75px black;
 }
 .card-bg {
-  background: url("https://s3-alpha-sig.figma.com/img/cd1b/eb35/3224c652f40c0754047c232b09e71cc3?Expires=1642377600&Signature=Dd6wWtiq6n5vahvj-6FJhhOsrwZ7ZeZoEeLEwSqPimBIOoxahwBXTdvGSHml-fAxSs9Nl1WyLU2-MAJjXYtgGmqX7xby7G7ah-XMPOV0OulR4NzNhiZhRBlzFiy3vLwPWwi7gtUqM0toamEf6rKYimvtHH5NHT4J4hMn0rhF4ZKHlqRg7buSus4rv~wx3Y-1aZp~Bk~FzK1N3rnUbqmQ9U~Xr8LsbdroeUX-CnTeu1xHImmFF9YE8H-segiRU5x-zA32gyu8M5XwEoq0Ab5BZf9Z2VZmm8KTh3mMqyY6bzYkLDFxeV50CGBoQiJfd0V1mkSkHyc2TnyelJkjPJYPmQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA");
+  background: "../assets/img/tower-card.png";
   object-fit: contain;
   background-position: center;
 }
