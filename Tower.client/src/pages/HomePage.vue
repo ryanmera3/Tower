@@ -39,10 +39,10 @@
       <div class="col-md-2 selectable py-2" @click="getEvents('conventions')">
         Conventions
       </div>
-      <div class="col-md-2 selectable py-2" @click="getEvents('exhibits')">
+      <div class="col-md-2 selectable py-2" @click="getEvents('exhibit')">
         Exhibits
       </div>
-      <div class="col-md-2 selectable py-2" @click="getEvents('sports')">
+      <div class="col-md-2 selectable py-2" @click="getEvents('sport')">
         Sports
       </div>
       <div class="col-md-2 selectable py-2" @click="getEvents('digital')">
