@@ -127,7 +127,7 @@ export default {
   -webkit-text-stroke: 0.75px black;
 }
 .card-bg {
-  background: "../assets/img/tower-card.png";
+  background: url("../assets/img/tower-card.png");
   object-fit: contain;
   background-position: center;
 }
